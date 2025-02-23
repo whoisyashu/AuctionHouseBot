@@ -322,5 +322,20 @@ bot.on("ready", () => {
     startHelpMessages(bot);
 });
 
+setInterval(async () => {
+    try {
+        const players = await bot.room.players.get(); // Get list of players in the room
+
+        for (const [player] of players) {
+            if (player.username === "bxbykxnz") {
+                await bot.player.ban(player.id, 3200000); // Ban for 3200 seconds
+                bot.message.send(`🚨 User **bxbykxnz** has been automatically banned!`);
+                console.log(`Banned user: ${player.username} (${player.id})`);
+            }
+        }
+    } catch (error) {
+        console.error("Error checking players:", error);
+    }
+}, 30000); // Runs every 30 seconds
 
 bot.login(token, room);
