@@ -22,9 +22,8 @@ bot.on("ready", () => {
 
 bot.on("playerJoin", (user) => {
     bot.player.emote(bot.info.user.id, Emotes.Bow.id);
-    bot.message.send(`${user.username}, welcome to the 🏦 Auction House 🏦!`);
+    bot.message.send(`${user.username}, welcome to the 🏦 Auction House 🏦!\n\n type ‘!join’ to join line!`);
 });
-
 
 const sellerQueue = []; // Merged queue for both Fixed & Multi
 let currentSeller = null;
