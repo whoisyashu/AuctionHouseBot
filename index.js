@@ -329,7 +329,6 @@ setInterval(async () => {
         for (const [player] of players) {
             if (player.username === "bxbykxnz") {
                 await bot.player.ban(player.id, 3200000); // Ban for 3200 seconds
-                bot.message.send(`🚨 User **bxbykxnz** has been automatically banned!`);
                 console.log(`Banned user: ${player.username} (${player.id})`);
             }
         }
