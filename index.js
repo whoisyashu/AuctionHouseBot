@@ -321,20 +321,24 @@ function stopHelpMessages() {
 bot.on("ready", () => {
     startHelpMessages(bot);
 });
+const { Priorities } = require("highrise.sdk");
 
+// Automatically buy a boost every 5 minutes
+const { Priorities } = require("highrise.sdk");
+
+// Automatically buy 8 boosts every 5 minutes
 setInterval(async () => {
     try {
-        const players = await bot.room.players.get(); // Get list of players in the room
-
-        for (const [player] of players) {
-            if (player.username === "bxbykxnz") {
-                await bot.player.ban(player.id, 3200000); // Ban for 3200 seconds
-                console.log(`Banned user: ${player.username} (${player.id})`);
-            }
+        for (let i = 0; i < 8; i++) {
+            await bot.wallet.boost.buy(Priorities.UserWalletOnly);
         }
+        console.log("✅ The bot has successfully boosted the room **8 times**!");
+        bot.message.send("🚀 The room has been **boosted 8 times**!");
     } catch (error) {
-        console.error("Error checking players:", error);
+        console.error("❌ Failed to boost the room:", error);
     }
-}, 30000); // Runs every 30 seconds
+}, 300000); // Runs every 5 minutes (300,000ms)
+ // Runs every 5 minutes (300,000ms)
+
 
 bot.login(token, room);
