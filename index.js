@@ -323,9 +323,6 @@ bot.on("ready", () => {
 });
 const { Priorities } = require("highrise.sdk");
 
-// Automatically buy a boost every 5 minutes
-const { Priorities } = require("highrise.sdk");
-
 // Automatically buy 8 boosts every 5 minutes
 setInterval(async () => {
     try {
@@ -333,7 +330,7 @@ setInterval(async () => {
             await bot.wallet.boost.buy(Priorities.UserWalletOnly);
         }
         console.log("✅ The bot has successfully boosted the room **8 times**!");
-        bot.message.send("🚀 The room has been **boosted 8 times**!");
+        
     } catch (error) {
         console.error("❌ Failed to boost the room:", error);
     }
