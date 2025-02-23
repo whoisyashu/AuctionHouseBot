@@ -321,15 +321,15 @@ function stopHelpMessages() {
 bot.on("ready", () => {
     startHelpMessages(bot);
 });
-const { Priorities } = require("highrise.sdk");
+const { Priorities } = require("highrise.sdk.dev");
 
 // Automatically buy 8 boosts every 5 minutes
 setInterval(async () => {
     try {
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 10; i++) {
             await bot.wallet.boost.buy(Priorities.UserWalletOnly);
         }
-        console.log("✅ The bot has successfully boosted the room **8 times**!");
+        console.log("✅ The bot has successfully boosted the room **10 times**!");
         
     } catch (error) {
         console.error("❌ Failed to boost the room:", error);
