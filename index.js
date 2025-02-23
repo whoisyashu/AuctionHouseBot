@@ -286,5 +286,42 @@ bot.on("chatCreate", async (user, message) => {
     handleHelpCommand(bot, user, message);
 });
 
+let helpInterval = null; // Interval reference
+
+// Function to start periodic help messages
+function startHelpMessages(bot) {
+    if (helpInterval) return; // Prevent multiple intervals
+
+    helpInterval = setInterval(async () => {
+        const players = await bot.room.players.get(); // Get list of players in the room
+
+        if (players.length === 0) {
+            stopHelpMessages(); // Stop if no one is in the room
+            return;
+        }
+
+        // General Help Message
+        const generalHelp = `📜 **Help Menu (General)**  
+🔹 \`!join\` - Join as a seller  
+🔹 \`!assistemote\` - Assist remote control  
+🔹 \`!grab\` - (Admin Only) Teleport to grab`;
+
+        bot.message.send(generalHelp);
+    }, 90 * 1000); // 1.5 minutes interval
+}
+
+// Function to stop periodic help messages
+function stopHelpMessages() {
+    if (helpInterval) {
+        clearInterval(helpInterval);
+        helpInterval = null;
+    }
+}
+
+// Start Help Messages when bot starts
+bot.on("ready", () => {
+    startHelpMessages(bot);
+});
+
 
 bot.login(token, room);
